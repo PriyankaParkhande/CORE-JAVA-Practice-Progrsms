@@ -1,4 +1,4 @@
-import java.util.*;
+
 
 class Encrypt {
 
@@ -45,6 +45,7 @@ class Encrypt {
 }
 
 public class EncryptiontApp {
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);

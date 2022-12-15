@@ -1,0 +1,877 @@
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database priya;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use priya;
+Database changed
+mysql> create table student(sid int(10),name varchar(30),email varchar(50),contact int(20),age int(10),state varchar(20));
+Query OK, 0 rows affected, 3 warnings (0.03 sec)
+
+mysql> insert into student(1,'priya','priya@gmail.com',32787489,22,'mh');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'priya','priya@gmail.com',32787489,22,'mh')' at line 1
+mysql> desc student
+    -> ;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sid     | int         | YES  |     | NULL    |       |
+| name    | varchar(30) | YES  |     | NULL    |       |
+| email   | varchar(50) | YES  |     | NULL    |       |
+| contact | int         | YES  |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| state   | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.04 sec)
+
+mysql> insert into student('1','priya','priya@gmail.com','32787489','22','mh');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1','priya','priya@gmail.com','32787489','22','mh')' at line 1
+mysql> insert into student values('1','priya','priya@gmail.com','32787489','22','mh');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values('2','ankita','ankita@gmail.com','756439','21','hy');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('3','anuja','anuja@gmail.com','32874989','22','ap');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('4','vinayak','vinayak@gmail.com','7654323','22','ka');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('5','rushikesh','rushikesh@gmail.com','7432987','23','ra');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++------+-----------+---------------------+----------+------+-------+
+| sid  | name      | email               | contact  | age  | state |
++------+-----------+---------------------+----------+------+-------+
+|    1 | priya     | priya@gmail.com     | 32787489 |   22 | mh    |
+|    2 | ankita    | ankita@gmail.com    |   756439 |   21 | hy    |
+|    3 | anuja     | anuja@gmail.com     | 32874989 |   22 | ap    |
+|    4 | vinayak   | vinayak@gmail.com   |  7654323 |   22 | ka    |
+|    5 | rushikesh | rushikesh@gmail.com |  7432987 |   23 | ra    |
++------+-----------+---------------------+----------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> delete from student where sid=1;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++------+-----------+---------------------+----------+------+-------+
+| sid  | name      | email               | contact  | age  | state |
++------+-----------+---------------------+----------+------+-------+
+|    2 | ankita    | ankita@gmail.com    |   756439 |   21 | hy    |
+|    3 | anuja     | anuja@gmail.com     | 32874989 |   22 | ap    |
+|    4 | vinayak   | vinayak@gmail.com   |  7654323 |   22 | ka    |
+|    5 | rushikesh | rushikesh@gmail.com |  7432987 |   23 | ra    |
++------+-----------+---------------------+----------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update student set emil='anu@gmail.com' where id=3;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+mysql> update student set emil='anu@gmail.com' where id=3;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+mysql> update student set emil='anu@gmail.com' where id='3';
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+mysql> update student set emil='anu@gmail.com' where sid='3';
+ERROR 1054 (42S22): Unknown column 'emil' in 'field list'
+mysql> update student set emil='anu@gmail.com' where sid=3;
+ERROR 1054 (42S22): Unknown column 'emil' in 'field list'
+mysql> update student set email='anu@gmail.com' where sid=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+-----------+---------------------+----------+------+-------+
+| sid  | name      | email               | contact  | age  | state |
++------+-----------+---------------------+----------+------+-------+
+|    2 | ankita    | ankita@gmail.com    |   756439 |   21 | hy    |
+|    3 | anuja     | anu@gmail.com       | 32874989 |   22 | ap    |
+|    4 | vinayak   | vinayak@gmail.com   |  7654323 |   22 | ka    |
+|    5 | rushikesh | rushikesh@gmail.com |  7432987 |   23 | ra    |
++------+-----------+---------------------+----------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select *from student where sid=4;
++------+---------+-------------------+---------+------+-------+
+| sid  | name    | email             | contact | age  | state |
++------+---------+-------------------+---------+------+-------+
+|    4 | vinayak | vinayak@gmail.com | 7654323 |   22 | ka    |
++------+---------+-------------------+---------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> create table company(cid int(10),name varchar(50),contact varchar(50),website varchar(50));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> desc company;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| cid     | int         | YES  |     | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| contact | varchar(50) | YES  |     | NULL    |       |
+| website | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table product(pid int(10),name varchar(50),price int(10),cid int foreign key references company(cid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key references company(cid)' at line 1
+mysql> create table product(pid int(10),name varchar(50),price int(10),cid int,primary key(pid), foreign key references company(cid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'references company(cid)' at line 1
+mysql> create table product(pid int(10),name varchar(50),price int(10),cid int,primary key(pid), foreign key references company(cid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'references company(cid))' at line 1
+mysql> create table product(pid int(10),name varchar(50),price int(10),cid int,primary key(pid), foreign key references company(cid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'references company(cid))' at line 1
+mysql> create table product(pid int(10),name varchar(50),price int(10),cid int);
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> create table employee(eid int,name varchar(50),address varchar(50),salary int(10));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eid     | int         | YES  |     | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| salary  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employee values(1,'ram','pune','10000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(2,'ramesh','mumbai','20000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(3,'rajesh','pune','10000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(4,'sham','amravati','30000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(5,'gansham','pune','40000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from employee;
++------+---------+----------+--------+
+| eid  | name    | address  | salary |
++------+---------+----------+--------+
+|    1 | ram     | pune     |  10000 |
+|    2 | ramesh  | mumbai   |  20000 |
+|    3 | rajesh  | pune     |  10000 |
+|    4 | sham    | amravati |  30000 |
+|    5 | gansham | pune     |  40000 |
++------+---------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where salary between 10000 and 30000;
++------+--------+----------+--------+
+| eid  | name   | address  | salary |
++------+--------+----------+--------+
+|    1 | ram    | pune     |  10000 |
+|    2 | ramesh | mumbai   |  20000 |
+|    3 | rajesh | pune     |  10000 |
+|    4 | sham   | amravati |  30000 |
++------+--------+----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where salary  10000 or 30000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '10000 or 30000' at line 1
+mysql> select * from employee where salary between 10000 or 30000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'or 30000' at line 1
+mysql> select salary from  employee where  10000 or 30000;
++--------+
+| salary |
++--------+
+|  10000 |
+|  20000 |
+|  10000 |
+|  30000 |
+|  40000 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select salary from  employee where  10000 and 30000;
++--------+
+| salary |
++--------+
+|  10000 |
+|  20000 |
+|  10000 |
+|  30000 |
+|  40000 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select *  from  employee where salary=10000 or salary=30000;
++------+--------+----------+--------+
+| eid  | name   | address  | salary |
++------+--------+----------+--------+
+|    1 | ram    | pune     |  10000 |
+|    3 | rajesh | pune     |  10000 |
+|    4 | sham   | amravati |  30000 |
++------+--------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select *  from  employee where salary not 10000 and salary=30000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '10000 and salary=30000' at line 1
+mysql> select *  from  employee where not salary=10000 and salary=30000;
++------+------+----------+--------+
+| eid  | name | address  | salary |
++------+------+----------+--------+
+|    4 | sham | amravati |  30000 |
++------+------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select *  from  employee e order by e.salary asc;
++------+---------+----------+--------+
+| eid  | name    | address  | salary |
++------+---------+----------+--------+
+|    1 | ram     | pune     |  10000 |
+|    3 | rajesh  | pune     |  10000 |
+|    2 | ramesh  | mumbai   |  20000 |
+|    4 | sham    | amravati |  30000 |
+|    5 | gansham | pune     |  40000 |
++------+---------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *  from  employee e order by e.salary desc;
++------+---------+----------+--------+
+| eid  | name    | address  | salary |
++------+---------+----------+--------+
+|    5 | gansham | pune     |  40000 |
+|    4 | sham    | amravati |  30000 |
+|    2 | ramesh  | mumbai   |  20000 |
+|    1 | ram     | pune     |  10000 |
+|    3 | rajesh  | pune     |  10000 |
++------+---------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *  from  employee e order by e.salary asc where id>=3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>=3' at line 1
+mysql> select *  from  employee e order by e.salary asc where id>3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>3' at line 1
+mysql> select *  from  employee e order by e.salary asc where id=(>=3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id=(>=3)' at line 1
+mysql> select *  from  employee e order by e.salary asc where id=3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id=3' at line 1
+mysql> select salary from employee e order by e.salary asc where eid>=3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where eid>=3' at line 1
+mysql> select *  from  employee e order by e.salary asc where eid>=3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where eid>=3' at line 1
+mysql> select *  from  employee where eid>=2 order by salary;
++------+---------+----------+--------+
+| eid  | name    | address  | salary |
++------+---------+----------+--------+
+|    3 | rajesh  | pune     |  10000 |
+|    2 | ramesh  | mumbai   |  20000 |
+|    4 | sham    | amravati |  30000 |
+|    5 | gansham | pune     |  40000 |
++------+---------+----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select *  from  employee e order by e.salary asc where salary not salary=10000 ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where salary not salary=10000' at line 1
+mysql> select *  from  employee where salary!=10000 order by salary;
++------+---------+----------+--------+
+| eid  | name    | address  | salary |
++------+---------+----------+--------+
+|    2 | ramesh  | mumbai   |  20000 |
+|    4 | sham    | amravati |  30000 |
+|    5 | gansham | pune     |  40000 |
++------+---------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select *  from  employee where salary=10000 and salary=30000 order by salary;
+Empty set (0.00 sec)
+
+mysql> select *  from  employee where salary=10000 or salary=30000 order by salary;
++------+--------+----------+--------+
+| eid  | name   | address  | salary |
++------+--------+----------+--------+
+|    1 | ram    | pune     |  10000 |
+|    3 | rajesh | pune     |  10000 |
+|    4 | sham   | amravati |  30000 |
++------+--------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select *from employee where id=1 or id=3 or id=4;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+mysql> select *from employee where eid=1 or eid=3 or eid=4;
++------+--------+----------+--------+
+| eid  | name   | address  | salary |
++------+--------+----------+--------+
+|    1 | ram    | pune     |  10000 |
+|    3 | rajesh | pune     |  10000 |
+|    4 | sham   | amravati |  30000 |
++------+--------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> create table player(pid int );
+
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use priya;
+Database changed
+mysql> select *from player;
+ERROR 1146 (42S02): Table 'priya.player' doesn't exist
+mysql> create table player(pid int(10),name varchar not null,email varchar not null,contact varchar not null,state varchar not null,run_record int not null,salary int not null,primary key(pid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null,email varchar not null,contact varchar not null,state varchar not null,' at line 1
+mysql> create table player(pid int(10),name varchar(50) not null,email varchar(50) not null,contact varchar(50) not null,state varchar(50) not null,run_record int ,salary int ,primary key(pid));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> select *from player;
+Empty set (0.00 sec)
+
+mysql> desc player;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| pid        | int         | NO   | PRI | NULL    |       |
+| name       | varchar(50) | NO   |     | NULL    |       |
+| email      | varchar(50) | NO   |     | NULL    |       |
+| contact    | varchar(50) | NO   |     | NULL    |       |
+| state      | varchar(50) | NO   |     | NULL    |       |
+| run_record | int         | YES  |     | NULL    |       |
+| salary     | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> insert into player values(1,'rohit','rohit@gmail.com','674658736','mh','15000','100000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into player values(2,'ishan','ishan@gmail.com','7658736','zh','1000','50000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into player values(3,'hardik','hpandya@gmail.com','92548336','ka','15000','20000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into player values(4,'virat','vkholi@gmail.com','743254876','ch','20000','90000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into player values(5,'sachin','stendulkar@gmail.com','94057376','mh','740000','60000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into player values(5,'lmalinga','malinga@gmail.com','2364876','ga','769880','30000');
+ERROR 1062 (23000): Duplicate entry '5' for key 'player.PRIMARY'
+mysql> update player where pid=6 where name='lmalinga';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where pid=6 where name='lmalinga'' at line 1
+mysql> update player set where pid=6 where name='lmalinga';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where pid=6 where name='lmalinga'' at line 1
+mysql> update player set  pid=6 where name='lmalinga';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select* from player;
++-----+--------+----------------------+-----------+-------+------------+--------+
+| pid | name   | email                | contact   | state | run_record | salary |
++-----+--------+----------------------+-----------+-------+------------+--------+
+|   1 | rohit  | rohit@gmail.com      | 674658736 | mh    |      15000 | 100000 |
+|   2 | ishan  | ishan@gmail.com      | 7658736   | zh    |       1000 |  50000 |
+|   3 | hardik | hpandya@gmail.com    | 92548336  | ka    |      15000 |  20000 |
+|   4 | virat  | vkholi@gmail.com     | 743254876 | ch    |      20000 |  90000 |
+|   5 | sachin | stendulkar@gmail.com | 94057376  | mh    |     740000 |  60000 |
++-----+--------+----------------------+-----------+-------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into player values(6,'lmalinga','malinga@gmail.com','2364876','ga','769880','30000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from player;
++-----+----------+----------------------+-----------+-------+------------+--------+
+| pid | name     | email                | contact   | state | run_record | salary |
++-----+----------+----------------------+-----------+-------+------------+--------+
+|   1 | rohit    | rohit@gmail.com      | 674658736 | mh    |      15000 | 100000 |
+|   2 | ishan    | ishan@gmail.com      | 7658736   | zh    |       1000 |  50000 |
+|   3 | hardik   | hpandya@gmail.com    | 92548336  | ka    |      15000 |  20000 |
+|   4 | virat    | vkholi@gmail.com     | 743254876 | ch    |      20000 |  90000 |
+|   5 | sachin   | stendulkar@gmail.com | 94057376  | mh    |     740000 |  60000 |
+|   6 | lmalinga | malinga@gmail.com    | 2364876   | ga    |     769880 |  30000 |
++-----+----------+----------------------+-----------+-------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from player where state='mh' or state='ch' or state='ka';
++-----+--------+----------------------+-----------+-------+------------+--------+
+| pid | name   | email                | contact   | state | run_record | salary |
++-----+--------+----------------------+-----------+-------+------------+--------+
+|   1 | rohit  | rohit@gmail.com      | 674658736 | mh    |      15000 | 100000 |
+|   3 | hardik | hpandya@gmail.com    | 92548336  | ka    |      15000 |  20000 |
+|   4 | virat  | vkholi@gmail.com     | 743254876 | ch    |      20000 |  90000 |
+|   5 | sachin | stendulkar@gmail.com | 94057376  | mh    |     740000 |  60000 |
++-----+--------+----------------------+-----------+-------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select *from player where run_record order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select *from player p where p.run_record order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select *from player p where p.run_record order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select *  from  player p order by p.run_record desc;
++-----+----------+----------------------+-----------+-------+------------+--------+
+| pid | name     | email                | contact   | state | run_record | salary |
++-----+----------+----------------------+-----------+-------+------------+--------+
+|   6 | lmalinga | malinga@gmail.com    | 2364876   | ga    |     769880 |  30000 |
+|   5 | sachin   | stendulkar@gmail.com | 94057376  | mh    |     740000 |  60000 |
+|   4 | virat    | vkholi@gmail.com     | 743254876 | ch    |      20000 |  90000 |
+|   1 | rohit    | rohit@gmail.com      | 674658736 | mh    |      15000 | 100000 |
+|   3 | hardik   | hpandya@gmail.com    | 92548336  | ka    |      15000 |  20000 |
+|   2 | ishan    | ishan@gmail.com      | 7658736   | zh    |       1000 |  50000 |
++-----+----------+----------------------+-----------+-------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select *  from  player where state='mh' and run_record>2000;
++-----+--------+----------------------+-----------+-------+------------+--------+
+| pid | name   | email                | contact   | state | run_record | salary |
++-----+--------+----------------------+-----------+-------+------------+--------+
+|   1 | rohit  | rohit@gmail.com      | 674658736 | mh    |      15000 | 100000 |
+|   5 | sachin | stendulkar@gmail.com | 94057376  | mh    |     740000 |  60000 |
++-----+--------+----------------------+-----------+-------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select *  from  player where state='mh' and run_record between run_record=2000 and run_record=300000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=2000 and run_record=300000' at line 1
+mysql> select *  from  player where state='mh' and run_record between 2000 and 300000;
++-----+-------+-----------------+-----------+-------+------------+--------+
+| pid | name  | email           | contact   | state | run_record | salary |
++-----+-------+-----------------+-----------+-------+------------+--------+
+|   1 | rohit | rohit@gmail.com | 674658736 | mh    |      15000 | 100000 |
++-----+-------+-----------------+-----------+-------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select *  from  player where state;
+Empty set (0.00 sec)
+
+mysql> select *  from  player where state!='mh';
++-----+----------+-------------------+-----------+-------+------------+--------+
+| pid | name     | email             | contact   | state | run_record | salary |
++-----+----------+-------------------+-----------+-------+------------+--------+
+|   2 | ishan    | ishan@gmail.com   | 7658736   | zh    |       1000 |  50000 |
+|   3 | hardik   | hpandya@gmail.com | 92548336  | ka    |      15000 |  20000 |
+|   4 | virat    | vkholi@gmail.com  | 743254876 | ch    |      20000 |  90000 |
+|   6 | lmalinga | malinga@gmail.com | 2364876   | ga    |     769880 |  30000 |
++-----+----------+-------------------+-----------+-------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select *  from  player where state!='mh' or state!='ka' or state!='ch';
++-----+----------+----------------------+-----------+-------+------------+--------+
+| pid | name     | email                | contact   | state | run_record | salary |
++-----+----------+----------------------+-----------+-------+------------+--------+
+|   1 | rohit    | rohit@gmail.com      | 674658736 | mh    |      15000 | 100000 |
+|   2 | ishan    | ishan@gmail.com      | 7658736   | zh    |       1000 |  50000 |
+|   3 | hardik   | hpandya@gmail.com    | 92548336  | ka    |      15000 |  20000 |
+|   4 | virat    | vkholi@gmail.com     | 743254876 | ch    |      20000 |  90000 |
+|   5 | sachin   | stendulkar@gmail.com | 94057376  | mh    |     740000 |  60000 |
+|   6 | lmalinga | malinga@gmail.com    | 2364876   | ga    |     769880 |  30000 |
++-----+----------+----------------------+-----------+-------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select *  from  player where state!='mh' and state!='ka' and state!='ch';
++-----+----------+-------------------+---------+-------+------------+--------+
+| pid | name     | email             | contact | state | run_record | salary |
++-----+----------+-------------------+---------+-------+------------+--------+
+|   2 | ishan    | ishan@gmail.com   | 7658736 | zh    |       1000 |  50000 |
+|   6 | lmalinga | malinga@gmail.com | 2364876 | ga    |     769880 |  30000 |
++-----+----------+-------------------+---------+-------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select *  from  player where salary>30000 and run_record>2000;
++-----+--------+----------------------+-----------+-------+------------+--------+
+| pid | name   | email                | contact   | state | run_record | salary |
++-----+--------+----------------------+-----------+-------+------------+--------+
+|   1 | rohit  | rohit@gmail.com      | 674658736 | mh    |      15000 | 100000 |
+|   4 | virat  | vkholi@gmail.com     | 743254876 | ch    |      20000 |  90000 |
+|   5 | sachin | stendulkar@gmail.com | 94057376  | mh    |     740000 |  60000 |
++-----+--------+----------------------+-----------+-------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select *  from  player where salary>30000 and run_record>2000 order by salary;
++-----+--------+----------------------+-----------+-------+------------+--------+
+| pid | name   | email                | contact   | state | run_record | salary |
++-----+--------+----------------------+-----------+-------+------------+--------+
+|   5 | sachin | stendulkar@gmail.com | 94057376  | mh    |     740000 |  60000 |
+|   4 | virat  | vkholi@gmail.com     | 743254876 | ch    |      20000 |  90000 |
+|   1 | rohit  | rohit@gmail.com      | 674658736 | mh    |      15000 | 100000 |
++-----+--------+----------------------+-----------+-------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select *  from  player count(pid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count(pid)' at line 1
+mysql> select  count(pid) from player;
++------------+
+| count(pid) |
++------------+
+|          6 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select  count(pid) where salary between 30000 and 500000 from player;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from player' at line 1
+mysql> select  count(salary) where salary between 30000 and 500000 from player;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from player' at line 1
+mysql> select * from player count(salary) where salary between 30000 and 500000 ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count(salary) where salary between 30000 and 500000' at line 1
+mysql> select  count(salary) where salary=30000;
+ERROR 1054 (42S22): Unknown column 'salary' in 'field list'
+mysql> select  count(salary) where salary='30000';
+ERROR 1054 (42S22): Unknown column 'salary' in 'field list'
+mysql> select  count(salary) where salary='60000';
+ERROR 1054 (42S22): Unknown column 'salary' in 'field list'
+mysql> select  count(salary) from player where salary='60000';
++---------------+
+| count(salary) |
++---------------+
+|             1 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from player count(salary)from player where salary between 30000 and 500000 ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count(salary)from player where salary between 30000 and 500000' at line 1
+mysql> select  count(salary) from player where salary='60000' and salary='30000';
++---------------+
+| count(salary) |
++---------------+
+|             0 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select  count(salary) from player where salary between salary='60000' and salary='30000';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='60000' and salary='30000'' at line 1
+mysql> select  count(salary) from player where salary between '60000' and '30000;;
+    '> select  count(salary) from player where salary between '60000' and '30000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '60000' and '30000' at line 2
+mysql> select  count(salary) from player where salary between '60000' and '30000';
++---------------+
+| count(salary) |
++---------------+
+|             0 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select  count(salary) from player where salary between '15000' and '30000';
++---------------+
+| count(salary) |
++---------------+
+|             2 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select  count(salary) from player where salary>30000 and salary>20000;
++---------------+
+| count(salary) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select  count(salary) from player where salary>30000 and salary>20000 and name;
+mysql> select  count(salary) from player where salary between '15000' and '30000';
++---------------+
+| count(salary) |
++---------------+
+|             2 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select  count(salary) from player where salary>30000 and salary>20000;
++---------------+
+| count(salary) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select  count(salary) from player where salary>30000 and salary>20000 and name!='r%';
++---------------+
+| count(salary) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select  SUM(salary) from player;
++-------------+
+| SUM(salary) |
++-------------+
+|      350000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select  SUM(salary) from player where name!='rohit' and name!='hardik';
++-------------+
+| SUM(salary) |
++-------------+
+|      230000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select  min(salary) from player;
++-------------+
+| min(salary) |
++-------------+
+|       20000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select  max(salary) from player;
++-------------+
+| max(salary) |
++-------------+
+|      100000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select  avr(salary) from player;
+ERROR 1305 (42000): FUNCTION priya.avr does not exist
+mysql> select  avg(salary) from player;
++-------------+
+| avg(salary) |
++-------------+
+|  58333.3333 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> create table prod(id int,name varchar(50) not null,price int,brand varchar(50) not null ,des varchar(50) not null);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc prod;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(50) | NO   |     | NULL    |       |
+| price | int         | YES  |     | NULL    |       |
+| brand | varchar(50) | NO   |     | NULL    |       |
+| des   | varchar(50) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into prod values(1,'parle',5,'parle-g','milk and wheat biscuit');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into prod values(2,'wheat oats',25,'nozz','oats');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into prod values(3,'good-day',35,'britania','biscuit');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into prod values(4,'fresh cream',60,'amul','cream');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into prod values(5,'manchow',60,'knowz','soup');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select from prod where name='%b%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from prod where name='%b%'' at line 1
+mysql> select from prod where name like name='%b%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from prod where name like name='%b%'' at line 1
+mysql> select * from prod where name like name='%b%';
+Empty set, 1 warning (0.00 sec)
+
+mysql> select * from prod ;
++------+-------------+-------+----------+------------------------+
+| id   | name        | price | brand    | des                    |
++------+-------------+-------+----------+------------------------+
+|    1 | parle       |     5 | parle-g  | milk and wheat biscuit |
+|    2 | wheat oats  |    25 | nozz     | oats                   |
+|    3 | good-day    |    35 | britania | biscuit                |
+|    4 | fresh cream |    60 | amul     | cream                  |
+|    5 | manchow     |    60 | knowz    | soup                   |
++------+-------------+-------+----------+------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from prod where name like name='%e%';
+Empty set, 1 warning (0.00 sec)
+
+mysql> select * from prod where name like '%e%';
++------+-------------+-------+---------+------------------------+
+| id   | name        | price | brand   | des                    |
++------+-------------+-------+---------+------------------------+
+|    1 | parle       |     5 | parle-g | milk and wheat biscuit |
+|    2 | wheat oats  |    25 | nozz    | oats                   |
+|    4 | fresh cream |    60 | amul    | cream                  |
++------+-------------+-------+---------+------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from prod where name like '%e';
++------+-------+-------+---------+------------------------+
+| id   | name  | price | brand   | des                    |
++------+-------+-------+---------+------------------------+
+|    1 | parle |     5 | parle-g | milk and wheat biscuit |
++------+-------+-------+---------+------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from prod where name like 'w%t';
+Empty set (0.00 sec)
+
+mysql> select * from prod where name like 'w%s';
++------+------------+-------+-------+------+
+| id   | name       | price | brand | des  |
++------+------------+-------+-------+------+
+|    2 | wheat oats |    25 | nozz  | oats |
++------+------------+-------+-------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from prod where name like '_A_%';
++------+---------+-------+---------+------------------------+
+| id   | name    | price | brand   | des                    |
++------+---------+-------+---------+------------------------+
+|    1 | parle   |     5 | parle-g | milk and wheat biscuit |
+|    5 | manchow |    60 | knowz   | soup                   |
++------+---------+-------+---------+------------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from prod where name like m%'';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%''' at line 1
+mysql> select * from prod where name like 'm%';
++------+---------+-------+-------+------+
+| id   | name    | price | brand | des  |
++------+---------+-------+-------+------+
+|    5 | manchow |    60 | knowz | soup |
++------+---------+-------+-------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from prod where name like '%le';
++------+-------+-------+---------+------------------------+
+| id   | name  | price | brand   | des                    |
++------+-------+-------+---------+------------------------+
+|    1 | parle |     5 | parle-g | milk and wheat biscuit |
++------+-------+-------+---------+------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from prod where name like 'p%' or price>5;
++------+-------------+-------+----------+------------------------+
+| id   | name        | price | brand    | des                    |
++------+-------------+-------+----------+------------------------+
+|    1 | parle       |     5 | parle-g  | milk and wheat biscuit |
+|    2 | wheat oats  |    25 | nozz     | oats                   |
+|    3 | good-day    |    35 | britania | biscuit                |
+|    4 | fresh cream |    60 | amul     | cream                  |
+|    5 | manchow     |    60 | knowz    | soup                   |
++------+-------------+-------+----------+------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from prod where name like 'p%' or price>35;
++------+-------------+-------+---------+------------------------+
+| id   | name        | price | brand   | des                    |
++------+-------------+-------+---------+------------------------+
+|    1 | parle       |     5 | parle-g | milk and wheat biscuit |
+|    4 | fresh cream |    60 | amul    | cream                  |
+|    5 | manchow     |    60 | knowz   | soup                   |
++------+-------------+-------+---------+------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select count(brand) from prod;
++--------------+
+| count(brand) |
++--------------+
+|            5 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select count(brand) from prod where brand='amul';
++--------------+
+| count(brand) |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select count(brand) from prod where price!>25 and price<10;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '!>25 and price<10' at line 1
+mysql> select count(brand) from prod where price not >25 and price<10;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>25 and price<10' at line 1
+mysql> select count(brand) from prod where price>25 or price<10;
++--------------+
+| count(brand) |
++--------------+
+|            4 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(price) from prod ;
++------------+
+| sum(price) |
++------------+
+|        185 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(price) from prod ;
++------------+
+| avg(price) |
++------------+
+|    37.0000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(price) from prod ;
++------------+
+| min(price) |
++------------+
+|          5 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(price) and max(price) from prod ;
++---------------------------+
+| min(price) and max(price) |
++---------------------------+
+|                         1 |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select *from prod where brand='nozz' or brand='parle-g';
++------+------------+-------+---------+------------------------+
+| id   | name       | price | brand   | des                    |
++------+------------+-------+---------+------------------------+
+|    1 | parle      |     5 | parle-g | milk and wheat biscuit |
+|    2 | wheat oats |    25 | nozz    | oats                   |
++------+------------+-------+---------+------------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from prod where des like '%s';
++------+------------+-------+-------+------+
+| id   | name       | price | brand | des  |
++------+------------+-------+-------+------+
+|    2 | wheat oats |    25 | nozz  | oats |
++------+------------+-------+-------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from prod where price not between 10 and 25;
++------+-------------+-------+----------+------------------------+
+| id   | name        | price | brand    | des                    |
++------+-------------+-------+----------+------------------------+
+|    1 | parle       |     5 | parle-g  | milk and wheat biscuit |
+|    3 | good-day    |    35 | britania | biscuit                |
+|    4 | fresh cream |    60 | amul     | cream                  |
+|    5 | manchow     |    60 | knowz    | soup                   |
++------+-------------+-------+----------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql>

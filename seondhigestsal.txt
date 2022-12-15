@@ -1,0 +1,69 @@
+max salary
+mysql> select * from employee;
++-----+----------+------------------+---------+--------+--------+
+| eid | ename    | email            | contact | salary | deptid |
++-----+----------+------------------+---------+--------+--------+
+|   1 | NULL     | NULL             | NULL    |  10000 |   NULL |
+|   4 | dinmenhi | dinesh@gmail.com | 36472   |   8483 |      3 |
+|   5 | ramesh   | ramesh@gmail.com | 3632272 |  13949 |      4 |
++-----+----------+------------------+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select max(salary)from employee where salary <(select max(salary)from employee);
++-------------+
+| max(salary) |
++-------------+
+|       10000 |
++-------------+
+1 row in set (0.00 sec)
+
+or
+
+mysql> select salary from employee order by salary desc limit 1,1;
++--------+
+| salary |
++--------+
+|  45000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee e where 2=(select count(distinct salary) from employee p where e.salary<=p.salary);
++--------+
+| salary |
++--------+
+|  45000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee e where 3=(select count(distinct salary) from employee p where e.salary<=p.salary);
++--------+
+| salary |
++--------+
+|  30000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from employee where salary>(select min(salary) from employee);
++-------------+
+| min(salary) |
++-------------+
+|       12345 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee group by salary  order by salary asc limit 1,1;
++--------+
+| salary |
++--------+
+|  12345 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee e where 2=(select count(distinct salary) from employee p where e.salary>=p.salary);
++--------+
+| salary |
++--------+
+|  12345 |
++--------+
+
+
